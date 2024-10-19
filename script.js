@@ -55,9 +55,9 @@ function gameController () {
     while(!gameOver) {
         // for getting the user to say where to put the x or o
         userInput = parseInt(prompt("Enter a number between 1 and 9"));
-        while (userInput < 0 || userInput > 8 || isNaN(userInput)) {
-            userInput = parseInt(prompt("Invalid input. Please enter a number between 1 and 9"));
-        }
+        // while (userInput < 0 || userInput > 8 || isNaN(userInput)) {
+        //     userInput = parseInt(prompt("Invalid input. Please enter a number between 1 and 9"));
+        // }
         // function to decide whose turn it is by dividing by 2 and seeing if there is a remainder and returning x or o
         let whoseTurn = (function () {
             if (gameboard.userTurn % 2 === 0) {
@@ -69,7 +69,7 @@ function gameController () {
             }
         })();
         // To put the x or o in the correct place
-        gameboard.theBoard[userInput] = whoseTurn;
+        gameboard.theBoard[userInput - 1] = whoseTurn;
 
         // call the gameDisplayer function to display the board
         gameDisplayer();
