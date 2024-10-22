@@ -1,3 +1,6 @@
+// variable for all the buttons
+let btns = document.querySelectorAll('.btn');
+
 // this is a tictactoe game
 const gameboard = (function () {
     // variable for deciding whose turn it is
@@ -50,11 +53,23 @@ function checkWin(board, player) {
 
 // function to control the flow of the game
 function gameController () {
+    let userInput = 0;
     let gameOver = false;
     // game loop
     while(!gameOver) {
         // for getting the user to say where to put the x or o
-        userInput = parseInt(prompt("Enter a number between 1 and 9"));
+        btns.forEach(button => {
+            button.addEventListener('click', (event) => {
+                // get the user input
+                if (event.target.classList.contains('btn')) {
+                    let userInput = parseInt(event.target.getAttribute('data-index'));
+                    console.log(userInput);
+                }
+                
+    
+            });
+        })
+        // console.log(userInput);
         // while (userInput < 0 || userInput > 8 || isNaN(userInput)) {
         //     userInput = parseInt(prompt("Invalid input. Please enter a number between 1 and 9"));
         // }
@@ -83,6 +98,8 @@ function gameController () {
             console.log("It's a tie!")
             gameOver = true;
         }
+        console.log(userInput);
+        gameOver = true;
         
     }
 }
@@ -99,5 +116,4 @@ function gameDisplayer () {
 
 
 gameController();
-console.log("Finally!!!!");
 

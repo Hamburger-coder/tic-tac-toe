@@ -1,0 +1,23 @@
+html {
+    background-color: #2d3142;
+}
+
+.container {
+    display: grid;
+    height: 500px;
+    width: 500px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+
+.btn {
+    background-color: #6F8AB7;
+    /* height: 50px;
+    width: 50px; */
+}
+h1 {
+    color: #CEDFD9;
+    text-align: center;
+}
