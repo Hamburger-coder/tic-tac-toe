@@ -8,6 +8,19 @@
 </head>
 <body>
     <h1>Tic-Tac-Toe</h1>
+    <dialog id="dialog">
+        <form id="userForm" method="dialog">
+            <label for="xname">What is player x's name?
+                <input type="text" name="xname" id="xname" required>
+            </label>
+            <label for="oname">What is player o's name?
+                <input type="text" name="oname" id="oname" required>
+            </label>
+            <div>
+                <button type="submit" id="submit">Submit</button>
+            </div>
+        </form>
+    </dialog>
     <div class="container">
         <button data-index="1" class="btn btn1"></button>
         <button data-index="2" class="btn btn2"></button>
@@ -19,7 +32,11 @@
         <button data-index="8" class="btn btn8"></button>
         <button data-index="9" class="btn btn9"></button>
     </div>
-
+    <div class="message">
+        <h1 id="who-won"></h1>
+    </div>
+    <!-- play again button -->
+     <button class="play-again" id="playAgain">Play Again</button>
     <script src="./script.js"></script>
 </body>
 </html>

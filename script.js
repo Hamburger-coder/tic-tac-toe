@@ -2,6 +2,34 @@
 let btns = document.querySelectorAll('.btn');
 let userInput = 0;
 let roundOver = false;
+let whoWonMsg = document.getElementById('who-won');
+let playAgainBtn = document.getElementById("playAgain");
+let dialog = document.getElementById('dialog');
+let userForm = document.getElementById('userForm');
+let player1;
+let player2;
+
+function showDialog() {
+    dialog.showModal();
+}
+
+dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+        dialog.close();
+    }
+});
+
+userForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(userForm);
+    player1 = formData.get('xname');
+    console.log(player1);
+    player2 = formData.get('oname');
+    console.log(player2);
+
+    dialog.close();
+
+})
 
 // clear the board
 function clearBoard() {
@@ -87,6 +115,7 @@ function gameController () {
                     let whoseTurn = (function () {
                         if (gameboard.userTurn % 2 === 0) {
                             gameboard.userTurn++;
+                            // console.log(player1);
                             return 'x';
                         } else {
                             gameboard.userTurn++;
@@ -102,10 +131,19 @@ function gameController () {
                     // If  statement to check for wins and tie's 
                     if (checkWin(gameboard.theBoard, whoseTurn)) {
                         gameDisplayer();
-                        console.log(`Player ${whoseTurn} wins!`);
+                        // whoWonMsg.textContent = `Player ${whoseTurn} wins!`;
+                        // console.log(`Player ${whoseTurn} wins!`);
+                        if (whoseTurn === 'x') {
+                            whoWonMsg.textContent = `Player ${player1} wins!`;
+                        } else {
+                            whoWonMsg.textContent = `Player ${player2} wins!`;
+                        }
+                        disableButtons();
                         roundOver = true;  // End the game
                     } else if (!gameboard.theBoard.includes('')) {
+                        whoWonMsg.textContent = "It's a tie!";
                         console.log("It's a tie!")
+                        disableButtons();
                         roundOver = true;
                     }
                     // console.log(userInput);
@@ -115,26 +153,31 @@ function gameController () {
             });
             
         })
-        
+        playAgainBtn.addEventListener('click', (event) => {
+            window.location.reload();
+        });
+
     
+}
+
+function disableButtons () {
+    btns.forEach( button => {
+        button.disabled = true;
+    });
 }
 
 function gameDisplayer (userInput) {
     let buttonClicked = document.getElementById(userInput);
     // logs the gameboard to the console
-    console.log('\nCurrent board:');
     for (let i = 0; i < 9; i++) {
         btns.forEach( button => {
             if (button.getAttribute('data-index') === (i + 1).toString()) {
                 button.textContent = gameboard.theBoard[i];
             }
         });
-        console.log(gameboard.theBoard.slice(i, i + 3).join(' | '));
-        if (i < 6) console.log('---------');
     }
-    console.log('\n');
+    
 }
 
-
+showDialog()
 gameController();
-
